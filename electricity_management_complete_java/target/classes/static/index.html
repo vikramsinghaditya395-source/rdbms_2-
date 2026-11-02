@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PowerDesk | Electricity Management</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><a class="brand" href="/">⚡ PowerDesk</a><span>Electricity Management System</span></header>
+<main class="wrap"><div id="message" class="message hidden"></div>
+<section id="loginView">
+  <div class="hero"><div><small>SMART UTILITY PORTAL</small><h1>Manage your electricity,<br><em>simply and clearly.</em></h1><p>One place to manage customers, meter readings, bills and payments.</p></div><div class="bolt">⚡</div></div>
+  <div class="cards">
+    <section class="card"><div class="icon">♙</div><h2>Customer Login</h2><p>Use your registered Customer ID and mobile number.</p>
+      <form id="customerLogin"><label>Customer ID</label><input id="customerId" placeholder="CUST1001" required><label>Mobile number</label><input id="mobile" maxlength="10" inputmode="numeric" placeholder="9876543210" required><button>Continue to OTP</button></form>
+      <small>Demo: CUST1001 / 9876543210</small>
+    </section>
+    <section class="card"><div class="icon">▣</div><h2>Admin Login</h2><p>Manage customers, readings, bills and payments.</p>
+      <form id="adminLogin"><label>Admin ID</label><input id="adminId" placeholder="admin" required><label>Password</label><input id="adminPassword" type="password" placeholder="admin123" required><button class="dark">Admin Login</button></form>
+      <small>Demo: admin / admin123</small>
+    </section>
+  </div>
+  <section class="card narrow hidden" id="otpBox"><h2>Verify customer OTP</h2><p>Use demo OTP <b>123456</b>.</p><form id="otpForm"><label>OTP</label><input id="otp" maxlength="6" inputmode="numeric" placeholder="123456" required><button>Verify & Login</button></form></section>
+</section>
+
+<section id="customerView" class="hidden">
+  <div class="heading"><div><small>CUSTOMER PORTAL</small><h1 id="welcome">Welcome</h1><p id="customerInfo"></p></div><button class="outline" onclick="logout()">Logout</button></div>
+  <div class="stats" id="customerStats"></div>
+  <section class="card"><h2>Your electricity bills</h2><div class="tableWrap"><table id="customerBills"></table></div></section>
+  <section class="card"><h2>Payment history</h2><div class="tableWrap"><table id="customerPayments"></table></div></section>
+</section>
+
+<section id="adminView" class="hidden">
+  <div class="heading"><div><small>ADMINISTRATOR PANEL</small><h1>Management dashboard</h1><p>Manage customers, meter readings, bills and payments.</p></div><button class="outline" onclick="logout()">Logout</button></div>
+  <div class="stats" id="adminStats"></div>
+  <section class="card"><h2>Add customer</h2><form id="addCustomer" class="formGrid">
+    <div><label>Customer ID</label><input id="newId" placeholder="CUST1004" required></div>
+    <div><label>Customer name</label><input id="newName" required></div>
+    <div><label>Mobile number</label><input id="newMobile" maxlength="10" required></div>
+    <div><label>Address</label><input id="newAddress" required></div>
+    <div><label>Connection type</label><select id="newType"><option>Residential</option><option>Commercial</option></select></div>
+    <button>Add customer</button>
+  </form><p class="note">Residential: ₹5/unit · Commercial: ₹8/unit (sample project rates)</p></section>
+  <section class="card"><h2>Generate electricity bill</h2><p>Choose a customer and enter meter readings. Java uses the connection type to select the rate.</p>
+    <form id="billForm" class="formGrid">
+      <div><label>Customer</label><select id="billCustomer"></select></div>
+      <div><label>Previous reading (kWh)</label><input id="previous" type="number" min="0" step=".01" placeholder="1200" required></div>
+      <div><label>Current reading (kWh)</label><input id="current" type="number" min="0" step=".01" placeholder="1450" required></div>
+      <div><label>Rate per unit</label><input id="ratePreview" value="Auto from connection" disabled></div>
+      <button>Calculate & Generate Bill</button>
+    </form><p class="note">Example: 1450 − 1200 = 250 units. Residential bill: ₹1,250; commercial bill: ₹2,000.</p>
+  </section>
+  <section class="card"><h2>Customer details</h2><div class="tableWrap"><table id="allCustomers"></table></div></section>
+  <section class="card"><h2>All bill details</h2><div class="tableWrap"><table id="allBills"></table></div></section>
+  <section class="card"><h2>All payment details</h2><div class="tableWrap"><table id="allPayments"></table></div></section>
+</section>
+</main><footer>PowerDesk · Educational demo · Simulated OTP and payment</footer>
+<script src="app.js"></script>
+</body></html>
